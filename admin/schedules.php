@@ -1,5 +1,9 @@
 <?php
 require_once '../settings/config.php';
+require '../vendor/autoload.php'; // Include the PHPMailer class
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // Function to get students
 function getStudents($conn)
@@ -23,18 +27,35 @@ function getStudentEmailByIdNumber($conn, $id_number)
     return $email;
 }
 
+// Function to send email notification using PHPMailer
 function sendEmailNotification($to, $case_title, $hearing_date)
 {
-    $subject = "Subpoena for Case Hearing: $case_title";
-    $message = "Dear Student,\n\nYou are required to attend a hearing for the case titled '$case_title' on $hearing_date.\n\nPlease make sure to be present.\n\nBest regards,\nAJCMS";
-    $headers = "From: no-reply@ajcms.edu";
+    $mail = new PHPMailer(true);
 
-    // Using PHP's mail function
-    if (mail($to, $subject, $message, $headers)) {
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com'; // Replace with your SMTP server
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'pascal.mathias30@ashesi.edu.gh'; // Replace with your SMTP username
+        $mail->Password   = 'leek vege xyof mszq'; // Replace with your SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587; // TCP port to connect to
+
+        // Recipients
+        $mail->setFrom('no-reply@ajcms.edu', 'AJCMS');
+        $mail->addAddress($to); // Add recipient
+
+        // Content
+        $mail->isHTML(false); // Set email format to plain text
+        $mail->Subject = "Subpoena for Case Hearing: $case_title";
+        $mail->Body    = "Dear Student,\n\nYou are required to attend a hearing for the case titled '$case_title' on $hearing_date.\n\nPlease make sure to be present.\n\nBest regards,\nAJCMS";
+
+        $mail->send();
         error_log("Email sent to $to");
         return true;
-    } else {
-        error_log("Failed to send email to $to");
+    } catch (Exception $e) {
+        error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
         return false;
     }
 }

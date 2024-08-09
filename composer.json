@@ -1,0 +1,12 @@
+{
+    "name": "psk30/ajcms",
+    "authors": [
+        {
+            "name": "Pascal",
+            "email": "pascal.mathias30@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
