@@ -9,8 +9,8 @@ require_once '../settings/config.php';
     <meta charset="UTF-8">
     <title><?php echo SITE_NAME; ?> - Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
-    <link rel="stylesheet" href="../CSS/styles.css"> <!-- Custom CSS for additional styling -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Custom CSS for additional styling -->
     <style>
         .bg-purple {
             background-color: #6f42c1; /* Bootstrap's purple color */

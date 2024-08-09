@@ -71,8 +71,8 @@ $evidence_items = getEvidenceItems($conn);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
-    <link rel="stylesheet" href="../CSS/styles.css"> <!-- Custom CSS for additional styling -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Custom CSS for additional styling -->
     <title><?php echo SITE_NAME; ?> - Document Management</title>
 </head>
 
