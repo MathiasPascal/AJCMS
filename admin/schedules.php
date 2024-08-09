@@ -37,7 +37,7 @@ function sendEmailNotification($to, $case_title, $hearing_date)
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com'; // Replace with your SMTP server
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'pascal.mathias30@ashesi.edu.gh'; // Replace with your SMTP username
+        $mail->Username   = 'pascal.mathias30@gmail.com'; // Replace with your SMTP username
         $mail->Password   = 'leek vege xyof mszq'; // Replace with your SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587; // TCP port to connect to
