@@ -1,11 +1,6 @@
 <?php
 require_once '../settings/config.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Fetch all roles
 $sql = "SELECT id, role_name FROM roles";
 $result = $conn->query($sql);
