@@ -116,7 +116,7 @@ require_once '../settings/config.php';
             </div>
             <!-- New AI Assistant Card with Background Color -->
             <div class="col-md-3 col-sm-6 mb-4">
-                <a href="ai_assistant.php" class="card-link">
+                <a href="https://10038a1eb5115d5d0a.gradio.live/" class="card-link">
                     <div class="card text-white text-center" style="background-color: #6f42c1;">
                         <div class="card-body">
                             <i class="fas fa-robot fa-2x"></i>
