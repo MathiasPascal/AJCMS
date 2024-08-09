@@ -5,7 +5,7 @@ define('BASE_URL', 'http://localhost/ajcms/');
 // Database configuration
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root'); // Change this to your database username
-define('DB_PASS', ''); // Change this to your database password
+define('DB_PASS', 'password'); // Change this to your database password
 define('DB_NAME', 'ajcms');
 
 // Create connection
