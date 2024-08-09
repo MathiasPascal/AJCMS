@@ -1,5 +1,9 @@
 <?php
 require_once '../settings/config.php';
+require 'vendor/autoload.php'; // This line includes Composer's autoloader
+use SendGrid\Mail\Mail;
+
+// Your existing code...
 
 // Function to get students
 function getStudents($conn)
@@ -25,16 +29,27 @@ function getStudentEmailByIdNumber($conn, $id_number)
 
 function sendEmailNotification($to, $case_title, $hearing_date)
 {
-    $subject = "Subpoena for Case Hearing: $case_title";
-    $message = "Dear Student,\n\nYou are required to attend a hearing for the case titled '$case_title' on $hearing_date.\n\nPlease make sure to be present.\n\nBest regards,\nAJCMS";
-    $headers = "From: no-reply@ajcms.edu";
+    $email = new \SendGrid\Mail\Mail();
+    $email->setFrom("no-reply@ajcms.edu", "AJCMS");
+    $email->setSubject("Subpoena for Case Hearing: $case_title");
+    $email->addTo($to);
+    $email->addContent(
+        "text/plain",
+        "Dear Student,\n\nYou are required to attend a hearing for the case titled '$case_title' on $hearing_date.\n\nPlease make sure to be present.\n\nBest regards,\nAJCMS"
+    );
 
-    // Using PHP's mail function
-    if (mail($to, $subject, $message, $headers)) {
-        error_log("Email sent to $to");
-        return true;
-    } else {
-        error_log("Failed to send email to $to");
+    $sendgrid = new \SendGrid('YOUR_SENDGRID_API_KEY');  // Replace with your actual API key
+    try {
+        $response = $sendgrid->send($email);
+        if ($response->statusCode() == 202) {
+            error_log("Email sent to $to");
+            return true;
+        } else {
+            error_log("Failed to send email to $to. Status Code: " . $response->statusCode());
+            return false;
+        }
+    } catch (Exception $e) {
+        error_log('Caught exception: '. $e->getMessage());
         return false;
     }
 }
